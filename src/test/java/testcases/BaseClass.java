@@ -1,10 +1,16 @@
 package testcases;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
@@ -12,12 +18,12 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BaseClass {
 
-	WebDriver driver;
+	RemoteWebDriver driver;
 	
-	private ThreadLocal<WebDriver> threadLocalDriver = new ThreadLocal<>();
+	private ThreadLocal<RemoteWebDriver> threadLocalDriver = new ThreadLocal<>();
 
 	@BeforeMethod
-	public void SetUp() {
+	public void SetUp() throws MalformedURLException {
 
 		String DriverType = System.getProperty("Browser");
 		if (DriverType.contains("firefox")) {
@@ -25,7 +31,15 @@ public class BaseClass {
 			WebDriverManager.firefoxdriver().setup();
 			driver = new FirefoxDriver();
 
-		} else {
+		} else if (DriverType.contains("remote")) {
+			
+			DesiredCapabilities cap = new DesiredCapabilities();
+			cap.setPlatform(Platform.WINDOWS);	
+			cap.setBrowserName("chrome");
+			driver = new RemoteWebDriver(new URL("http://44.199.246.137:4444"),cap);
+		}
+		
+		else {
 
 			WebDriverManager.chromedriver().setup();
 			driver = new ChromeDriver();
@@ -44,13 +58,13 @@ public class BaseClass {
 
 	}
 	
-	public void SetDriver(WebDriver driver) {
+	public void SetDriver(RemoteWebDriver driver) {
 
 		threadLocalDriver.set(driver);
 
 	}
 	
-	public WebDriver GetDriver() {
+	public RemoteWebDriver GetDriver() {
 
 		return threadLocalDriver.get();
 
