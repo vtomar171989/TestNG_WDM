@@ -50,6 +50,7 @@ public class BaseClass {
 			options.addArguments("--disable-extensions") ;
 			options.addArguments("--disable-gpu") ;
 			options.addArguments("start-maximized") ;
+			options.addArguments("--window-size=1920,1080");
 			options.addArguments("disable-infobars") ;
 			options.addArguments("--headless") ;
 			driver = new ChromeDriver(options);
