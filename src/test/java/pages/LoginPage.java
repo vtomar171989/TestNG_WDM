@@ -13,7 +13,7 @@ public class LoginPage {
 	
 	//=================================== Locators =============================
 	
-	@FindBy(linkText="Log in")
+	@FindBy(className="login")
 	WebElement loginLink;
 	
 	@FindBy(name="user_login")
