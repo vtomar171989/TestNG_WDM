@@ -34,15 +34,19 @@ public class BaseClass {
 		} else if (DriverType.contains("remote")) {
 			
 			DesiredCapabilities cap = new DesiredCapabilities();
-			cap.setPlatform(Platform.WINDOWS);	
+			cap.setPlatform(Platform.LINUX);	
 			cap.setBrowserName("chrome");
-			driver = new RemoteWebDriver(new URL("http://localhost:4444"),cap);
+			driver = new RemoteWebDriver(new URL("http://44.199.246.137:4444"),cap);
 		}
 		
 		else {
-
+			
 			WebDriverManager.chromedriver().setup();
-			driver = new ChromeDriver();
+			
+			ChromeOptions options = new ChromeOptions();
+			options.addArguments("--disable-dev-shm-usage");
+			options.addArguments("--no-sandbox");
+			driver = new ChromeDriver(options);
 		}
 		
 		SetDriver(driver);
