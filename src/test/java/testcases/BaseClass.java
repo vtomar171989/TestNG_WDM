@@ -33,10 +33,12 @@ public class BaseClass {
 
 		} else if (DriverType.contains("remote")) {
 			
-			DesiredCapabilities cap = new DesiredCapabilities();
-			cap.setPlatform(Platform.LINUX);	
-			cap.setBrowserName("chrome");
-			driver = new RemoteWebDriver(new URL("http://18.205.27.15:4444"),cap);
+			ChromeOptions options = new ChromeOptions();
+			options.addArguments("--no-sandbox"); 
+			options.addArguments("--disable-dev-shm-using") ;
+			options.addArguments("--window-size=1920,1080");
+			options.addArguments("--headless") ;;
+			driver = new RemoteWebDriver(new URL("http://3.87.30.31:4444"),options);
 		}
 		
 		else {
@@ -60,7 +62,7 @@ public class BaseClass {
 	@AfterMethod
 	public void TearDown() {
 
-		GetDriver().close();
+		GetDriver().quit();
 
 	}
 	
