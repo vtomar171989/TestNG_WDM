@@ -23,7 +23,7 @@ public class BaseClass {
 	private ThreadLocal<RemoteWebDriver> threadLocalDriver = new ThreadLocal<>();
 
 	@BeforeMethod
-	public void SetUp() throws MalformedURLException {
+	public void SetUp() throws MalformedURLException, InterruptedException {
 
 		String DriverType = System.getProperty("Browser");
 		if (DriverType.contains("firefox")) {
