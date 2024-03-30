@@ -36,13 +36,13 @@ public class BaseClass {
 			DesiredCapabilities cap = new DesiredCapabilities();
 			cap.setPlatform(Platform.LINUX);	
 			cap.setBrowserName("chrome");
-			driver = new RemoteWebDriver(new URL("http://44.199.246.137:4444"),cap);
+			driver = new RemoteWebDriver(new URL("http://18.205.27.15:4444"),cap);
 		}
 		
 		else {
 			
+			// added some comments
 			WebDriverManager.chromedriver().setup();
-			
 			ChromeOptions options = new ChromeOptions();
 			options.addArguments("--no-sandbox"); 
 			options.addArguments("--disable-dev-shm-using") ;
