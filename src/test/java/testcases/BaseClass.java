@@ -44,8 +44,14 @@ public class BaseClass {
 			WebDriverManager.chromedriver().setup();
 			
 			ChromeOptions options = new ChromeOptions();
-			options.addArguments("--disable-dev-shm-usage");
-			options.addArguments("--no-sandbox");
+			options.addArguments("--no-sandbox"); 
+			options.addArguments("--disable-setuid-sandbox") ;
+			options.addArguments("--disable-dev-shm-using") ;
+			options.addArguments("--disable-extensions") ;
+			options.addArguments("--disable-gpu") ;
+			options.addArguments("start-maximized") ;
+			options.addArguments("disable-infobars") ;
+			options.addArguments("--headless") ;
 			driver = new ChromeDriver(options);
 		}
 		
